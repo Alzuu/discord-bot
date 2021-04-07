@@ -29,6 +29,7 @@ client.on('message', async (message) => {
 
   // Allu bait & check that the author of the message is not the bot itself
   if (!message.content.startsWith(prefix) && message.content.includes('free')) return message.channel.send('allu thats toxic');
+  if (!message.content.startsWith(prefix) && message.content.trim().toLowerCase() === "fuck you dolphin") return message.channel.send('FUCK YOU WHALE');
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   // Format the input
