@@ -24,17 +24,23 @@ client.once('ready', () => {
 });
 
 client.on('message', async (message) => {
+  // Set prefix
   const prefix = '!';
+
+  // Allu bait & check that the author of the message is not the bot itself
   if (!message.content.startsWith(prefix) && message.content.includes('free')) return message.channel.send('allu thats toxic');
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
+  // Format the input
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
+  // Check whether command is valid
   const command = client.commands.get(commandName);
 
   if (!command) return;
 
+  // Check that the arguments are valid
   if (command.args && !args.length) {
     let reply = `You didn't provide any arguments, ${message.author}!`;
 
@@ -45,6 +51,7 @@ client.on('message', async (message) => {
     message.channel.send(reply);
   }
 
+  // If all before apply, run command
   try {
     command.run(client, message, args);
   } catch (error) {
