@@ -5,11 +5,14 @@ module.exports = {
   category: 'fun',
   description: 'Create a simple poll',
   run: async (client, message, args) => {
+    // Addition of reactions
     const addReactions = async (msg) => {
       await msg.react('👍');
       await msg.react('👎');
     };
 
+    // Check if the args are empty, if so delete the latest message, otherwise create a new message with the poll
+    // Then add reactions to the latest message
     if (args.length < 1) {
       await message.delete();
 
