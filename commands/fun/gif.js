@@ -1,5 +1,3 @@
-//require('dotenv').config();
-
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
@@ -16,8 +14,11 @@ module.exports = {
     // Check if the args are empty, if so post a random gif of pandas from the top 30 results
     // Otherwise search and choose a random gif from the top 30 results
     if (args.length < 1) {
+      await message.delete();
 
-      const url = `https://g.tenor.com/v1/search?q=panda&key=${apikey}&limit=50`;
+      const fetched = await message.channel.messages.fetch({ limit: 1 });
+
+      const url = `https://g.tenor.com/v1/search?q=${fetched.first()}&key=${apikey}&limit=30`;
       const response = await fetch(url);
       const json = await response.json();
 
@@ -27,7 +28,7 @@ module.exports = {
 
     } else {
        
-      const url = `https://g.tenor.com/v1/search?q=${args.join('_')}&key=${apikey}&limit=50`;
+      const url = `https://g.tenor.com/v1/search?q=${args.join('_')}&key=${apikey}&limit=30`;
       const response = await fetch(url);
       const json = await response.json();
 
