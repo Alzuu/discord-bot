@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
   name: 'topgif',
   category: 'fun',
-  description: 'Post a random gif from tenor',
+  description: 'Post the top ranked gif for the search from tenor',
   run: async (client, message, args) => {
      
     const fetch = require('node-fetch');
