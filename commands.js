@@ -14,11 +14,13 @@
 
 const { readdirSync } = require('fs');
 
-const ascii = require('ascii-table');
+const { AsciiTable3, AlignmentEnum } = require('ascii-table3');
 
 // Creates new empty ascii table
-const table = new ascii('Commands');
-table.setHeading('Folder', 'Command', 'Status');
+const table = new AsciiTable3('Bot commands')
+  .setHeading('Name', 'Category', 'Status')
+  .setAlignCenter(3, AlignmentEnum.CENTER)
+  .setStyle('unicode-single');
 
 module.exports = (client) => {
   // Read every commands subfolder
@@ -28,11 +30,11 @@ module.exports = (client) => {
     commands.forEach((command) => {
       const pull = require(`./commands/${dir}/${command}`);
 
-      if (pull.name) {
+      if (pull.run) {
         client.commands.set(pull.name, pull);
-        table.addRow(dir, pull.name, '✅');
+        table.addRow(pull.name, dir, '🎉');
       } else {
-        table.addRow(dir, pull.name, '❌');
+        table.addRow(pull.name, dir, '💀');
       }
 
       // If there's an aliases key, read the aliases.

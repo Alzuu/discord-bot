@@ -4,7 +4,8 @@ module.exports = {
   name: 'poll',
   category: 'fun',
   description: 'Create a simple poll',
-  run: async (client, message, args) => {
+  usage: '<command> <title>, <command>',
+  run: async (message, args) => {
     // Addition of reactions
     const addReactions = async (msg) => {
       await msg.react('👍');

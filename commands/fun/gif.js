@@ -3,9 +3,10 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
   name: 'gif',
   category: 'fun',
-  description: 'Post a random gif from tenor',
+  description: 'Post a random GIF from Tenor',
+  usage: '<command> <query>, <command>',
   run: async (client, message, args) => {
-     
+
     const fetch = require('node-fetch');
 
     // Tenor API key
@@ -27,15 +28,15 @@ module.exports = {
       const msg = await message.channel.send(json.results[rndm].url);
 
     } else {
-       
-      const url = `https://g.tenor.com/v1/search?q=${args.join('_')}&key=${apikey}&limit=30`;
+
+      const url = `https://g.tenor.com/v1/search?q=${args.join('_')}&key=${apikey}&limit=50`;
       const response = await fetch(url);
       const json = await response.json();
 
       let rndm = Math.floor(Math.random() * 28) + 1
 
       const msg = await message.channel.send(json.results[rndm].url);
-    
+
     }
   },
 };
