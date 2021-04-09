@@ -2,6 +2,7 @@ module.exports = {
   name: 'args-info',
   category: 'info',
   description: 'Information about the arguments provided.',
+  usage: '<command> <name> ...',
   args: true,
   run: (client, message, args) => {
     if (args[0] === 'foo') {
