@@ -12,7 +12,8 @@ module.exports = {
       await msg.react('👎');
     };
 
-    // Check if the args are empty, if so delete the latest message, otherwise create a new message with the poll
+    // Check if the args are empty, if so delete this message and look at the latest one,
+    // otherwise create a new message with the poll determined by args
     // Then add reactions to the latest message
     if (args.length < 1) {
       await message.delete();

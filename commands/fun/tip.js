@@ -17,7 +17,8 @@ module.exports = {
       if (tipper.id === tipped.id) {
         message.channel.send('You cannot tip your self :rage:');
       } else {
-        mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true })
+        mongoose
+          .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
           .then(async (mongoose) => {
             try {
               let firstQueryResult = await Tip.findOne({
@@ -48,26 +49,36 @@ module.exports = {
                 const newTips = firstQueryResult.tips - 1;
                 const newPoints = secondQueryResult.points + 50;
 
-                await Tip.findOneAndUpdate({
-                  user_id: tipper.id,
-                }, {
-                  user_id: tipper.id,
-                  points: firstQueryResult.points,
-                  tips: newTips,
-                }, {
-                  new: true,
-                });
+                await Tip.findOneAndUpdate(
+                  {
+                    user_id: tipper.id,
+                  },
+                  {
+                    user_id: tipper.id,
+                    points: firstQueryResult.points,
+                    tips: newTips,
+                  },
+                  {
+                    new: true,
+                  }
+                );
 
-                await Tip.findOneAndUpdate({
-                  user_id: tipped.id,
-                }, {
-                  user_id: tipped.id,
-                  points: newPoints,
-                  tips: secondQueryResult.tips,
-                }, {
-                  new: true,
-                });
-                message.channel.send(`${tipper.toString()} just tipped ${tipped.toString()} 50 :coin:`);
+                await Tip.findOneAndUpdate(
+                  {
+                    user_id: tipped.id,
+                  },
+                  {
+                    user_id: tipped.id,
+                    points: newPoints,
+                    tips: secondQueryResult.tips,
+                  },
+                  {
+                    new: true,
+                  }
+                );
+                message.channel.send(
+                  `${tipper.toString()} just tipped ${tipped.toString()} 50 :coin:`
+                );
               } else {
                 message.channel.send('You have no tips left! :frowning2:');
               }
@@ -89,7 +100,8 @@ module.exports = {
       if (tipper.id === tipped.id) {
         message.channel.send('You cannot tip your self :rage:');
       } else {
-        mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true })
+        mongoose
+          .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
           .then(async (mongoose) => {
             try {
               let firstQueryResult = await Tip.findOne({
@@ -120,22 +132,32 @@ module.exports = {
                 const newTips = firstQueryResult.tips - 1;
                 const newPoints = secondQueryResult.points + 50;
 
-                await Tip.findOneAndUpdate({
-                  user_id: tipper.id,
-                }, {
-                  user_id: tipper.id,
-                  points: firstQueryResult.points,
-                  tips: newTips,
-                });
+                await Tip.findOneAndUpdate(
+                  {
+                    user_id: tipper.id,
+                  },
+                  {
+                    user_id: tipper.id,
+                    points: firstQueryResult.points,
+                    tips: newTips,
+                  }
+                );
 
-                await Tip.findOneAndUpdate({
-                  user_id: tipped.id,
-                }, {
-                  user_id: tipped.id,
-                  points: newPoints,
-                  tips: secondQueryResult.tips,
-                });
-                message.channel.send(`${tipper.toString()} just tipped ${tipped.toString()} 50 :coin:. New balance of ${tipped.toString()} is ${secondQueryResult.points}`);
+                await Tip.findOneAndUpdate(
+                  {
+                    user_id: tipped.id,
+                  },
+                  {
+                    user_id: tipped.id,
+                    points: newPoints,
+                    tips: secondQueryResult.tips,
+                  }
+                );
+                message.channel.send(
+                  `${tipper.toString()} just tipped ${tipped.toString()} 50 :coin:. New balance of ${tipped.toString()} is ${
+                    secondQueryResult.points
+                  }`
+                );
               } else {
                 message.channel.send('You have no tips left! :frowning2:');
               }
