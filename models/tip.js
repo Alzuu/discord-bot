@@ -12,7 +12,7 @@ const tipSchema = new Schema({
   tips: {
       type: Number,
   }
-}, { timestamps:false });
+}, { timestamps: false });
 
 const Tip = mongoose.model('Tip', tipSchema);
 module.exports = Tip;
