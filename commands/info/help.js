@@ -2,7 +2,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
   name: 'help',
-  description: 'Shows a table with all the available commands or info about a specific command.',
+  description:
+    'Shows a table with all the available commands or info about a specific command.',
   category: 'info',
   aliases: ['h', 'commands'],
   usage: '<command>, <command> <name>',
@@ -20,7 +21,11 @@ module.exports = {
       embed
         .setColor('#F2F251')
         .setTitle('🤖 Beep boop providing commands')
-        .setDescription(`${data.join('\n')}\n\nType !help <command> for command-specific info!`)
+        .setDescription(
+          `${data.join(
+            '\n'
+          )}\n\nType !help <command> for command-specific info!`
+        )
         .setTimestamp();
     } else {
       const command = commands.get(args[0]);
@@ -30,7 +35,7 @@ module.exports = {
         .setDescription(command.description)
         .addFields(
           { name: 'Category', value: command.category },
-          { name: 'Usage', value: command.usage },
+          { name: 'Usage', value: command.usage }
         )
         .setTimestamp();
     }

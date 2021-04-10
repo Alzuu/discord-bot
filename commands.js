@@ -26,7 +26,9 @@ module.exports = (client) => {
   // Read every commands subfolder
   readdirSync('./commands/').forEach((dir) => {
     // Filter .js command files
-    const commands = readdirSync(`./commands/${dir}/`).filter((file) => file.endsWith('.js'));
+    const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
+      file.endsWith('.js')
+    );
     commands.forEach((command) => {
       const pull = require(`./commands/${dir}/${command}`);
 
