@@ -1,7 +1,7 @@
 const { Client, Collection } = require('discord.js');
 const cron = require('cron');
-const Tip = require('./models/tip.js');
 const mongoose = require('mongoose');
+const Tip = require('./models/tip.js');
 
 require('dotenv').config();
 
@@ -31,8 +31,13 @@ client.on('message', async (message) => {
   const prefix = '!';
 
   // Allu bait & check that the author of the message is not the bot itself
-  if (!message.content.startsWith(prefix) && message.content.includes('free')) return message.channel.send('allu thats toxic');
-  if (!message.content.startsWith(prefix) && message.content.trim().toLowerCase() === "fuck you dolphin") return message.channel.send('FUCK YOU WHALE');
+  if (!message.content.startsWith(prefix) && message.content.includes('free'))
+    return message.channel.send('allu thats toxic');
+  if (
+    !message.content.startsWith(prefix) &&
+    message.content.trim().toLowerCase() === 'fuck you dolphin'
+  )
+    return message.channel.send('FUCK YOU WHALE');
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   // Format the input
@@ -66,19 +71,19 @@ client.on('message', async (message) => {
 
 client.login(process.env.TOKEN);
 
-let tip_filler = new cron.CronJob('00 00 20 * * *', () => {
+const tipFiller = new cron.CronJob('00 00 20 * * *', () => {
   // This runs every day at 20:00:00, you can do anything you want
-  
+
   const dbURL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.obsge.mongodb.net/Discord-bot?retryWrites=true&w=majority`;
-  mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true })
-          .then(async mongoose => {
-            try {
-              const res = await Tip.updateMany({},
-                {tips : 3})
-            } finally {
-              mongoose.connection.close()
-            }
-          })
+  mongoose
+    .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(async (mongoose) => {
+      try {
+        await Tip.updateMany({}, { tips: 3 });
+      } finally {
+        mongoose.connection.close();
+      }
+    });
 });
 
-tip_filler.start()
+tipFiller.start();

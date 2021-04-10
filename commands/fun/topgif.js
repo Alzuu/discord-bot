@@ -1,12 +1,9 @@
-const { MessageEmbed } = require('discord.js');
-
 module.exports = {
   name: 'topgif',
   category: 'fun',
   description: 'Post a top GIF from Tenor',
   usage: '<command> <query>, <command>',
   run: async (client, message, args) => {
-
     const fetch = require('node-fetch');
 
     // Tenor API key
@@ -23,16 +20,15 @@ module.exports = {
       const response = await fetch(url);
       const json = await response.json();
 
-      const msg = await message.channel.send(json.results[0].url);
-
+      await message.channel.send(json.results[0].url);
     } else {
-
-      const url = `https://g.tenor.com/v1/search?q=${args.join('_')}&key=${apikey}&limit=1`;
+      const url = `https://g.tenor.com/v1/search?q=${args.join(
+        '_'
+      )}&key=${apikey}&limit=1`;
       const response = await fetch(url);
       const json = await response.json();
 
-      const msg = await message.channel.send(json.results[0].url);
-
+      await message.channel.send(json.results[0].url);
     }
   },
 };
