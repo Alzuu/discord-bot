@@ -20,7 +20,7 @@ client.once('ready', () => {
   client.user.setPresence({
     status: 'online',
     activity: {
-      name: 'Allu doing tiktok dances',
+      name: 'the devs doing their best',
       type: 'WATCHING',
     },
   });
@@ -30,15 +30,9 @@ client.on('message', async (message) => {
   // Set prefix
   const prefix = '!';
 
-  // Allu bait & check that the author of the message is not the bot itself
+  // Check that the author of the message is not the bot itself
   if (!message.content.startsWith(prefix) && message.content.includes('free'))
     return message.channel.send('allu thats toxic');
-  if (
-    !message.content.startsWith(prefix) &&
-    message.content.trim().toLowerCase() === 'fuck you dolphin'
-  )
-    return message.channel.send('FUCK YOU WHALE');
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   // Format the input
   const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -57,15 +51,15 @@ client.on('message', async (message) => {
       reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
     }
 
-    message.channel.send(reply);
+    return message.channel.send(reply);
   }
 
   // If all before apply, run command
   try {
-    command.run(client, message, args);
-  } catch (error) {
-    console.error(error);
-    message.reply('There was an error trying to run the command!');
+    return command.run(client, message, args);
+  } catch (e) {
+    console.error(e);
+    return message.reply('There was an error trying to run the command!');
   }
 });
 
