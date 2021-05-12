@@ -154,9 +154,7 @@ module.exports = {
                   }
                 );
                 message.channel.send(
-                  `${tipper.toString()} just tipped ${tipped.toString()} 50 :coin:. New balance of ${tipped.toString()} is ${
-                    secondQueryResult.points
-                  }`
+                  `${tipper.toString()} just tipped ${tipped.toString()} 50 :coin:`
                 );
               } else {
                 message.channel.send('You have no tips left! :frowning2:');
