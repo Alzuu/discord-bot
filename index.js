@@ -31,8 +31,7 @@ client.on('message', async (message) => {
   const prefix = '!';
 
   // Check that the author of the message is not the bot itself
-  if (!message.content.startsWith(prefix) && message.content.includes('free'))
-    return message.channel.send('allu thats toxic');
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   // Format the input
   const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -51,15 +50,15 @@ client.on('message', async (message) => {
       reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
     }
 
-    return message.channel.send(reply);
+    message.channel.send(reply);
   }
 
   // If all before apply, run command
   try {
-    return command.run(client, message, args);
+    command.run(client, message, args);
   } catch (e) {
     console.error(e);
-    return message.reply('There was an error trying to run the command!');
+    message.reply('There was an error trying to run the command!');
   }
 });
 
