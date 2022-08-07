@@ -5,30 +5,31 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"**/*.{js,json,md}\""
+    "format": "prettier --write \"**/*.{js,json,md}\"",
+    "update:packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save"
   },
   "author": "Allan Li",
   "license": "ISC",
   "dependencies": {
-    "ascii-table": "0.0.9",
-    "ascii-table3": "^0.5.1",
-    "cron": "^1.8.2",
-    "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "ffmpeg": "0.0.4",
-    "mongodb": "^3.6.6",
-    "mongoose": "^5.12.3",
-    "node-fetch": "2.6.1",
-    "node-opus": "^0.3.3",
-    "npm": "^6.14.12",
-    "ytdl-core": "^1.0.9"
+    "ascii-table": "*",
+    "ascii-table3": "*",
+    "cron": "*",
+    "discord.js": "*",
+    "dotenv": "*",
+    "eslint-plugin-prettier": "*",
+    "ffmpeg": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "node-fetch": "*",
+    "node-opus": "*",
+    "npm": "*",
+    "ytdl-core": "*"
   },
   "devDependencies": {
-    "eslint": "^7.24.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "prettier": "^2.2.1"
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-import": "*",
+    "prettier": "*"
   }
 }
